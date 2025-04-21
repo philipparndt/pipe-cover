@@ -4,10 +4,8 @@ width=55;
 length=110;
 fn=200;
 
-a=false; // Part A
+a=true; // Part A
 b=false;  // Part B
-
-base(h, width, length, fn);
 
 if (a) {
     union() {
