@@ -3,9 +3,12 @@ h=6;
 width=55;
 length=110;
 fn=200;
+distance = 10;
 
 a=true; // Part A
 b=true;  // Part B
+
+version="v2";
 
 if (a) {
     union() {
@@ -17,6 +20,12 @@ if (a) {
                 }
             }
         }
+
+        // Version number
+        rotate([0, 0, 90])
+            translate([length/2, -width*1/6, h / 2])
+                linear_extrude(2)
+                    text(version, size=8, halign="center",$fn=fn);
 
         translate([0.2,0,2])
             translate([width / 2, 0, 0]) {
@@ -34,29 +43,35 @@ if (a) {
 }
 
 if (b) {
-    union() {
-        translate([-10, 0, 0]) {
+    translate([-distance, 0, 0])
+    difference() {
+        union() {
             difference() {
-                difference() {
-                    base(h, width, length, fn);
-                    translate([width / 2 + .1, -.1, -.1]) {
-                        cube([width / 2, length + .2, h + .2], center = false);
-                    }
+                base(h, width, length, fn);
+                translate([width / 2 + .1, -.1, -.1]) {
+                    cube([width / 2, length + .2, h + .2], center = false);
                 }
-
-                translate([0.2,0,1.5])
-                    translate([width / 2 , 0, -.1]) {
-                        translate([0, 10, 0]) {
-                            nut(h - 1.3, extend = .2);
-                        }
-                        translate([0, length / 2, 0]) {
-                            nut(h - 1.3, extend = .2);
-                        }
-                        translate([0, length - 10, 0]) {
-                            nut(h - 1.3, extend =  .2);
-                        }
-                    }
             }
+
+            // Version number
+            rotate([0, 0, 90])
+                translate([length/2, -width*5/6, h / 2])
+                    rotate([0, 0, 180])
+                        linear_extrude(2)
+                            text(version, size=8, halign="center",$fn=fn);
         }
+
+        translate([0.2,0,1.5])
+            translate([width / 2 , 0, -.1]) {
+                translate([0, 10, 0]) {
+                    nut(h - 1.3, extend = .2);
+                }
+                translate([0, length / 2, 0]) {
+                    nut(h - 1.3, extend = .2);
+                }
+                translate([0, length - 10, 0]) {
+                    nut(h - 1.3, extend =  .2);
+                }
+            }
     }
 }
