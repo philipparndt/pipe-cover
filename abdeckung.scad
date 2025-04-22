@@ -1,11 +1,13 @@
 use <./base.scad>
-h=5;
+h=6;
 width=55;
 length=110;
 fn=200;
 
+//base(h, width, length, fn);
+
 a=true; // Part A
-b=false;  // Part B
+b=true;  // Part B
 
 if (a) {
     union() {
@@ -18,17 +20,18 @@ if (a) {
             }
         }
 
-        translate([width / 2, 0, 0]) {
-            translate([0, 10, 0]) {
-                nut(h - 2);
+        translate([0,0,2])
+            translate([width / 2, 0, 0]) {
+                translate([0, 10, 0]) {
+                    nut(h - 4);
+                }
+                translate([0, length / 2, 0]) {
+                    nut(h - 4);
+                }
+                translate([0, length - 10, 0]) {
+                    nut(h - 4);
+                }
             }
-            translate([0, length / 2, 0]) {
-                nut(h - 2);
-            }
-            translate([0, length - 10, 0]) {
-                nut(h - 2);
-            }
-        }
     }
 }
 
@@ -43,17 +46,18 @@ if (b) {
                     }
                 }
 
-                translate([width / 2 + .2, 0, -.1]) {
-                    translate([0, 10, 0]) {
-                        nut(h - 1.5, .2);
+                translate([0,0,1.5])
+                    translate([width / 2 + .2, 0, -.1]) {
+                        translate([0, 10, 0]) {
+                            nut(h - 1.3, .2);
+                        }
+                        translate([0, length / 2, 0]) {
+                            nut(h - 1.3, .2);
+                        }
+                        translate([0, length - 10, 0]) {
+                            nut(h - 1.3, .2);
+                        }
                     }
-                    translate([0, length / 2, 0]) {
-                        nut(h - 1.5, .2);
-                    }
-                    translate([0, length - 10, 0]) {
-                        nut(h - 1.5, .2);
-                    }
-                }
             }
         }
     }

@@ -5,10 +5,16 @@ module base(h, width, length, fn) {
     corner_radius=10;
 
     difference() {
-//        minkowski() {
-            _base_plate_shape(corner_radius, h, width, length, fn);
-//            translate([0, 0, corner_radius]) cylinder(r=corner_radius/2, h=0.001, $fn=fn);
-//        }
+        union() {
+            difference() {
+                _base_plate_shape(corner_radius, h, width, length, fn);
+                translate([3,3,h-2]) {
+                    offset=3;
+                    _base_plate_shape(corner_radius-offset, h-2, width-offset*2, length-offset*2, fn);
+                }
+            }
+        }
+
         translate([width/2, length/2-distance/2, -.1]) {
             cylinder(d=diameter, h=h+.2, center=false, $fn=fn);
             translate([0, distance, 0]) {
@@ -26,17 +32,32 @@ module rounded_top_only(corner_radius, h, width, length, fn) {
 }
 
 module _base_plate_shape(corner_radius, h, width, length, fn) {
+    hs=h/2;
+    hn=h-hs;
+
+    translate([0, 0, hs])
+
     union() {
         translate([corner_radius, 0, 0])
-            cube([width - corner_radius * 2, length, h], center=false);
+            cube([width - corner_radius * 2, length, hn], center=false);
 
         translate([0, corner_radius, 0])
-            cube([width, length - corner_radius * 2, h], center=false);
+            cube([width, length - corner_radius * 2, hn], center=false);
 
         for (x = [corner_radius, width - corner_radius])
         for (y = [corner_radius, length - corner_radius])
         translate([x, y, 0])
-            cylinder(d = corner_radius * 2, h = h, center = false, $fn = fn);
+            cylinder(d = corner_radius * 2, h = hn, center = false, $fn = fn);
+
+        // -------
+
+        hull() {
+            for (x = [corner_radius, width - corner_radius])
+            for (y = [corner_radius, length - corner_radius])
+            translate([x, y, 0])
+                translate([0, 0, -hs])
+                    cylinder(r1=corner_radius-hs, r2=corner_radius, h = hs, center = false, $fn = fn);
+        }
     }
 }
 
