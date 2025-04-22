@@ -1,4 +1,4 @@
-# heizung-cover
+# Pipe cover
 
 Customizable pipe cover
 
