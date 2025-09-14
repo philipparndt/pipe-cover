@@ -1,6 +1,6 @@
 module base(h, width, length, fn) {
     diameter=18;
-    distance=52;
+    distance=49;
 
     corner_radius=10;
 
@@ -65,7 +65,7 @@ module nut(h,extend=0) {
     nut_height=h;
     nut_width=5+extend;
     nut_length=4+extend;
-    nut_length_=2+extend;
+    nut_length_=1+extend;
     rotate([0,0,90]) {
         translate([-nut_length/2,0,0]) {
             linear_extrude(height=nut_height)

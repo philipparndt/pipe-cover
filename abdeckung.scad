@@ -1,14 +1,15 @@
 use <./base.scad>
 h=6;
-width=55;
-length=110;
+width=38;
+length=90;
 fn=200;
 distance = 10;
+nutDistance = 5;
 
 a=true; // Part A
-b=true;  // Part B
+b=false;  // Part B
 
-version="v2";
+version="";
 
 if (a) {
     union() {
@@ -29,13 +30,13 @@ if (a) {
 
         translate([0.2,0,2])
             translate([width / 2, 0, 0]) {
-                translate([0, 10, 0]) {
+                translate([0, nutDistance, 0]) {
                     nut(h - 4);
                 }
                 translate([0, length / 2, 0]) {
                     nut(h - 4);
                 }
-                translate([0, length - 10, 0]) {
+                translate([0, length - nutDistance, 0]) {
                     nut(h - 4);
                 }
             }
@@ -63,13 +64,13 @@ if (b) {
 
         translate([0.2,0,1.5])
             translate([width / 2 , 0, -.1]) {
-                translate([0, 10, 0]) {
+                translate([0, nutDistance, 0]) {
                     nut(h - 1.3, extend = .2);
                 }
                 translate([0, length / 2, 0]) {
                     nut(h - 1.3, extend = .2);
                 }
-                translate([0, length - 10, 0]) {
+                translate([0, length - nutDistance, 0]) {
                     nut(h - 1.3, extend =  .2);
                 }
             }
