@@ -19,7 +19,7 @@ STL_FILE="${FILENAME}.stl"
 echo "Rendering $SCAD_FILE to $STL_FILE..."
 
 # Render OpenSCAD file to STL
-openscad -o "$STL_FILE" "$SCAD_FILE"
+openscad --export-format binstl -o "$STL_FILE" "$SCAD_FILE"
 
 # Check if rendering was successful
 if [ $? -eq 0 ]; then
