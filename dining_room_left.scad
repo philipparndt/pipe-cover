@@ -1,0 +1,5 @@
+use <./base.scad>
+use <./_cfg.scad>
+use <./dining_room_config.scad>
+
+left(get_h(), get_width(), get_length(), get_diameter(), get_distance(), get_nutDistance(), get_fn());

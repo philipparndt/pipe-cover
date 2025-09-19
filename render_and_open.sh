@@ -3,12 +3,10 @@
 # Script to render OpenSCAD file to STL and open in BambuStudio
 # Usage: ./render_and_open.sh [scad_file]
 
-# Set default file if none provided
-SCAD_FILE="${1:-pipe_cover.scad}"
+SCAD_FILE="${1}"
 
-# Check if OpenSCAD file exists
-if [ ! -f "$SCAD_FILE" ]; then
-    echo "Error: OpenSCAD file '$SCAD_FILE' not found!"
+if [ -z "$SCAD_FILE" ]; then
+    echo "Usage: $0 [scad_file]"
     exit 1
 fi
 
