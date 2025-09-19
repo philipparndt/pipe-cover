@@ -1,6 +1,6 @@
-module base(h, width, length, fn) {
-    diameter=17;
-    distance=49;
+module base(h, width, length, diameter, distance, fn) {
+//    diameter=17;
+//    distance=52;
 
     corner_radius=10;
 
@@ -78,5 +78,64 @@ module nut(h,extend=0) {
 
             cube([nut_length, nut_width, nut_height], center=false);
         }
+    }
+}
+
+module both(h, width, length, diameter, distance, nutDistance, separation, fn) {
+    left(h, width, length, diameter, distance, nutDistance, fn);
+
+    translate([-separation, 0, 0])
+        right(h, width, length, diameter, distance, nutDistance, fn);
+}
+
+module left(h, width, length, diameter, distance, nutDistance, fn) {
+    union() {
+        translate([0, 0, 0]) {
+            difference() {
+                base(h, width, length, diameter, distance, fn);
+                translate([-.1, -.1, -.1]) {
+                    cube([width / 2, length + .2, h + .2], center = false);
+                }
+            }
+        }
+
+        translate([0.2,0,2])
+            translate([width / 2, 0, 0]) {
+                translate([0, nutDistance, 0]) {
+                    nut(h - 4);
+                }
+                translate([0, length / 2, 0]) {
+                    nut(h - 4);
+                }
+                translate([0, length - nutDistance, 0]) {
+                    nut(h - 4);
+                }
+            }
+    }
+}
+
+module right(h, width, length, diameter, distance, nutDistance, fn) {
+    difference() {
+        union() {
+            difference() {
+                base(h, width, length, diameter, distance, fn);
+                translate([width / 2 + .1, -.1, -.1]) {
+                    cube([width / 2, length + .2, h + .2], center = false);
+                }
+            }
+        }
+
+        translate([0.2,0,1.5])
+            translate([width / 2 , 0, -.1]) {
+                translate([0, nutDistance, 0]) {
+                    nut(h - 1.3, extend = .2);
+                }
+                translate([0, length / 2, 0]) {
+                    nut(h - 1.3, extend = .2);
+                }
+                translate([0, length - nutDistance, 0]) {
+                    nut(h - 1.3, extend =  .2);
+                }
+            }
     }
 }
