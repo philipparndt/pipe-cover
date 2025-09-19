@@ -4,10 +4,10 @@ width=38;
 length=90;
 fn=200;
 distance = 10;
-nutDistance = 5;
+nutDistance = 6;
 
-a=true; // Part A
-b=false;  // Part B
+a=false; // Part A
+b=true;  // Part B
 
 version="";
 

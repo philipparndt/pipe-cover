@@ -1,5 +1,5 @@
 module base(h, width, length, fn) {
-    diameter=18;
+    diameter=17;
     distance=49;
 
     corner_radius=10;
