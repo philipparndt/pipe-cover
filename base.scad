@@ -79,11 +79,23 @@ module nut(h,extend=0) {
     }
 }
 
-module both(h, width, length, diameter, distance, nutDistance, separation, offset_l=0, offset_r=0, fn) {
-    left(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
+module both(h, width, length, diameter, distance, nutDistance, separation, offset_l=0, offset_r=0, fn, draft=false) {
+    difference() {
+        union() {
+            left(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
 
-    translate([-separation, 0, 0])
-        right(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
+            translate([-separation, 0, 0])
+                right(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
+        }
+
+    if (draft) {
+        translate([-separation,0,3])
+            cube([width+separation,length,10],center=false);
+
+        translate([-separation,0,-8])
+            cube([width+separation,length,10],center=false);
+    }
+    }
 }
 
 module left(h, width, length, diameter, distance, nutDistance, offset_l=0, offset_r=0, fn) {
