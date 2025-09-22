@@ -2,4 +2,14 @@ use <./base.scad>
 use <./_cfg.scad>
 use <./dining_room_config.scad>
 
-right(get_h(), get_width(), get_length(), get_diameter(), get_distance(), get_nutDistance(), get_fn());
+right(
+    h=get_h(),
+    width=get_width(),
+    length=get_length(),
+    diameter=get_diameter(),
+    distance=get_distance(),
+    nutDistance=get_nutDistance(),
+    offset_l=get_offset_l(),
+    offset_r=get_offset_r(),
+    fn=get_fn()
+);

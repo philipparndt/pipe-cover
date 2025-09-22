@@ -1,7 +1,4 @@
-module base(h, width, length, diameter, distance, fn) {
-//    diameter=17;
-//    distance=52;
-
+module base(h, width, length, diameter, distance, offset_l=0, offset_r=0, fn) {
     corner_radius=10;
 
     difference() {
@@ -16,8 +13,9 @@ module base(h, width, length, diameter, distance, fn) {
         }
 
         translate([width/2, length/2-distance/2, -.1]) {
+            translate([offset_l, 0, 0])
             cylinder(d=diameter, h=h+.2, center=false, $fn=fn);
-            translate([0, distance, 0]) {
+            translate([offset_r, distance, 0]) {
                 cylinder(d=diameter, h=h+.2, center=false, $fn=fn);
             }
         }
@@ -81,18 +79,18 @@ module nut(h,extend=0) {
     }
 }
 
-module both(h, width, length, diameter, distance, nutDistance, separation, fn) {
-    left(h, width, length, diameter, distance, nutDistance, fn);
+module both(h, width, length, diameter, distance, nutDistance, separation, offset_l=0, offset_r=0, fn) {
+    left(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
 
     translate([-separation, 0, 0])
-        right(h, width, length, diameter, distance, nutDistance, fn);
+        right(h, width, length, diameter, distance, nutDistance, offset_l, offset_r, fn);
 }
 
-module left(h, width, length, diameter, distance, nutDistance, fn) {
+module left(h, width, length, diameter, distance, nutDistance, offset_l=0, offset_r=0, fn) {
     union() {
         translate([0, 0, 0]) {
             difference() {
-                base(h, width, length, diameter, distance, fn);
+                base(h, width, length, diameter, distance, offset_l, offset_r, fn);
                 translate([-.1, -.1, -.1]) {
                     cube([width / 2, length + .2, h + .2], center = false);
                 }
@@ -114,11 +112,11 @@ module left(h, width, length, diameter, distance, nutDistance, fn) {
     }
 }
 
-module right(h, width, length, diameter, distance, nutDistance, fn) {
+module right(h, width, length, diameter, distance, nutDistance, offset_l=0, offset_r=0, fn) {
     difference() {
         union() {
             difference() {
-                base(h, width, length, diameter, distance, fn);
+                base(h, width, length, diameter, distance, offset_l, offset_r, fn);
                 translate([width / 2 + .1, -.1, -.1]) {
                     cube([width / 2, length + .2, h + .2], center = false);
                 }

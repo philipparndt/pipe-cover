@@ -8,3 +8,5 @@ function get_diameter() = 18;
 function get_distance() = 52;
 function get_nutDistance() = 10;
 function get_separation() = 10;
+function get_offset_l() = 0;
+function get_offset_r() = 0;
