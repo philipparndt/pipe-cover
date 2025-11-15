@@ -1,0 +1,67 @@
+# Simple example: Customizable text plate
+# This shows basic config file usage
+
+output: covers.3mf
+build_plate: "Supertack Plate"
+
+# Packing distance between objects in mm (default: 10.0)
+packing_distance: 1.0
+
+# Packing algorithm - "default" or "compact" (default: "default")
+# Compact: places objects in both directions as compactly as possible to reduce travel time
+packing_algorithm: compact
+
+objects:
+  - name: kitchen
+    config:
+      - cfg.scad: |
+          function get_h() = 6;
+          function get_width() = 38;
+          function get_length() = 90;
+          function get_diameter() = 16;
+          function get_distance() = 48.5;
+          function get_nutDistance() = 6;
+          function get_separation() = 10;
+          function get_offset_l() = -0.75;
+          function get_offset_r() = 0.75;
+
+    parts:
+      - name: cover
+        file: both.scad
+        filament: 1
+
+  - name: dining_room
+    config:
+      - cfg.scad: |
+          function get_h() = 6;
+          function get_width() = 38;
+          function get_length() = 90;
+          function get_diameter() = 17;
+          function get_distance() = 52;
+          function get_nutDistance() = 6;
+          function get_separation() = 10;
+          function get_offset_l() = 0;
+          function get_offset_r() = 0;
+
+    parts:
+      - name: cover
+        file: both.scad
+        filament: 1
+
+  - name: toilet_ground_floor
+    config:
+      - cfg.scad: |
+          function get_h() = 6;
+          function get_width() = 55;
+          function get_length() = 110;
+          function get_diameter() = 18;
+          function get_distance() = 52;
+          function get_nutDistance() = 10;
+          function get_separation() = 10;
+          function get_offset_l() = 0;
+          function get_offset_r() = 0;
+
+    parts:
+      - name: cover
+        file: both.scad
+        filament: 1
