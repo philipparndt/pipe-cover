@@ -16,13 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 'stable'
-
       - name: Install go3mf
-        run: go install github.com/philipparndt/go3mf@latest
+        run: |
+          curl -L https://github.com/philipparndt/go3mf/releases/latest/download/go3mf_linux_x86_64.tar.gz -o go3mf.tar.gz
+          tar -xzf go3mf.tar.gz
+          sudo mv go3mf /usr/local/bin/
+          rm go3mf.tar.gz
 
       - name: Install OpenSCAD
         run: |
