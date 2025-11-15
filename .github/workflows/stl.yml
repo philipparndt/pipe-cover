@@ -16,10 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install go3mf
+        run: |
+          curl -L https://github.com/philipparndt/go3mf/releases/latest/download/go3mf_linux_x86_64.tar.gz -o go3mf.tar.gz
+          tar -xzf go3mf.tar.gz
+          sudo mv go3mf /usr/local/bin/
+          rm go3mf.tar.gz
+
       - name: Install OpenSCAD
         run: |
           sudo apt-get update
           sudo apt-get install -y openscad
-      
+
       - name: Build models
         run: ./build.sh
